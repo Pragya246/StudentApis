@@ -16,7 +16,7 @@ public interface StudentService {
 
     void deleteStudentById(Long id);
 
-//    List<Student> getStudentByCourseCode(String courseCode);
+    List<Student> getStudentByCourseCode(String courseCode);
 
 
 }

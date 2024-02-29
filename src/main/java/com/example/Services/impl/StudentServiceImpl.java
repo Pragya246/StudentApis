@@ -7,7 +7,9 @@ import com.example.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -54,10 +56,12 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
-//    @Override
-//    public List<Student> getStudentByCourseCode(String courseCode) {
-//
-//        List<Student> students= studentRepo.findByCourses(courses);
-//        return students;
-//    }
+    @Override
+    public List<Student> getStudentByCourseCode(String courseCode) {
+        List<Student> students = studentRepo.searchByCourse("%"+courseCode+"%");;
+//        List<Student> studentList = new ArrayList<>();
+//        List<Student> studentList = students.stream().map(student -> (student.getCourses().contains(courseCode))?).collect(Collectors.toList());
+//        students.forEach(student -> (student.getCourses().contains(courseCode))?studentList.add(student):);
+        return students;
+    }
 }
