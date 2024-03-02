@@ -1,5 +1,6 @@
 package com.example.Services.impl;
 
+import com.example.Entity.Courses;
 import com.example.Entity.Student;
 import com.example.Exception.ResourceNotFoundException.ResourceNotFoundException;
 import com.example.Repository.StudentRepo;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -42,7 +43,7 @@ public class StudentServiceImpl implements StudentService {
     public Student updateStudentById(Long id, Student student) {
         Student updatedstudent = studentRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("student",id));
         updatedstudent.setName(student.getName());
-        updatedstudent.setCourses(student.getCourses());
+        updatedstudent.setCourses_enrolled(student.getCourses_enrolled());
         updatedstudent.setDob(student.getDob());
         studentRepo.save(updatedstudent);
         return updatedstudent;
@@ -52,16 +53,27 @@ public class StudentServiceImpl implements StudentService {
     public void deleteStudentById(Long id) {
 
         Student student = studentRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("student",id));
+        List<Student> studentList = new ArrayList<>();
         studentRepo.delete(student);
 
     }
 
     @Override
     public List<Student> getStudentByCourseCode(String courseCode) {
-        List<Student> students = studentRepo.searchByCourse("%"+courseCode+"%");;
-//        List<Student> studentList = new ArrayList<>();
-//        List<Student> studentList = students.stream().map(student -> (student.getCourses().contains(courseCode))?).collect(Collectors.toList());
-//        students.forEach(student -> (student.getCourses().contains(courseCode))?studentList.add(student):);
+//        List<Student> studentsEnrolledInCourse = new ArrayList<>();
+//
+//        List<Student> allStudents = studentRepo.findAll();
+//        for (Student student : allStudents) {
+//            for (Courses course : student.getCourses_enrolled()) {
+//                if (course.getCourses_enrolled().equals(courseCode)) {
+//                    studentsEnrolledInCourse.add(student);
+//                    break;
+//                }
+//            }
+//        }
+//        return studentsEnrolledInCourse;
+        List<Student> students = studentRepo.findByCourseCode(courseCode);
         return students;
+
     }
 }

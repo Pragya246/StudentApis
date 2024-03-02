@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface StudentRepo extends JpaRepository<Student,Long> {
 
-    @Query("Select s.student_id,s.name,s.dob from student s join student_courses sc on sc.student_id=s.student_id where sc.courses_enrolled =:keyword")
-    List<Student> searchByCourse(@Param("keyword") String keyword);
 
+    @Query("SELECT s FROM Student s JOIN s.courses_enrolled c WHERE c.courses_enrolled = :courseCode")
+    List<Student> findByCourseCode(@Param("courseCode") String courseCode);
 }

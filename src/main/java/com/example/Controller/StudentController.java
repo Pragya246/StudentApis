@@ -46,9 +46,9 @@ public class StudentController {
         return ResponseEntity.ok("Student deleted successfully.");
     }
 
-//    @GetMapping("/findbycourse/{course}")
-//    ResponseEntity<List<Student>> findStudentsByCourse(@PathVariable String course) {
-//        List<Student> students = studentService.getStudentByCourseCode(course);
-//        return ResponseEntity.ok(students);
-//    }
+    @GetMapping("/findbycourse/{course}")
+    ResponseEntity<List<Student>> findStudentsByCourse(@PathVariable String course) {
+        List<Student> students = studentService.getStudentByCourseCode(course);
+        return ResponseEntity.ok(students);
+    }
 }

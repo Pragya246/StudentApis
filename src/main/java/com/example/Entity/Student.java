@@ -25,6 +25,6 @@ public class Student {
     @AttributeOverrides({
             @AttributeOverride(name = "courses_enrolled", column = @Column(name = "courses_enrolled"))
     })
-    private Set<Courses> courses = new HashSet<>();
+    private Set<Courses> courses_enrolled = new HashSet<>();
 
 }
